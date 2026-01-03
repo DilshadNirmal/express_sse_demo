@@ -1,5 +1,3 @@
----
-
 # Optimistic Updates with Confirmed Persistence (SSE)
 
 This project demonstrates a **real-time data flow** using **Server-Sent Events (SSE)** that follows an **Optimistic UI Update with Confirmed Persistence** pattern.
@@ -10,9 +8,7 @@ The goal is to:
 * Confirm durability by persisting the same data on the backend
 * Keep the SSE connection open and reliable
 * Ensure the UI remains stable until new data arrives
-
----
-
+  
 ## 🧠 What Problem Does This Solve?
 
 In real-time systems:
