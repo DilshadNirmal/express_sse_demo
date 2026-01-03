@@ -1,0 +1,19 @@
+GET http://localhost:3001/api/events
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+    "s1": 45,
+    "s2": 65
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+    "s1": 55,
+    "s2": 75
+}

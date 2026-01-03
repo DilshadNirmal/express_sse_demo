@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OUWCP</title>
+  </head>
+  <body>
+    <div id="events"></div>
+
+    <script>
+      const container = document.getElementById("events");
+
+      let currentData = null;
+
+      let cached = sessionStorage.getItem("lastData");
+      if (cached) {
+        currentData = JSON.parse(cached);
+        render();
+      } else {
+        container.innerHTML = "<p>Waiting for response...</p>";
+      }
+
+      const eventSource = new EventSource("http://localhost:3001/api/events");
+
+      eventSource.onmessage = (e) => {
+        try {
+          currentData = JSON.parse(e.data);
+          sessionStorage.setItem("lastData", JSON.stringify(currentData));
+          render();
+        } catch (err) {
+          console.error("Parse error:", e.data);
+        }
+      };
+
+      eventSource.onerror = (e) => {
+        console.error("SSE error", e);
+      };
+
+      function render() {
+        container.innerHTML = `
+      <pre>${JSON.stringify(currentData, null, 2)}</pre>
+    `;
+      }
+    </script>
+  </body>
+</html>
